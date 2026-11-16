@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VYRO — Currency Exchange</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#" class="logo">VYRO<span>.</span></a>
+
+        <nav>
+            <a href="#converter">Converter</a>
+            <a href="#chart">Chart</a>
+            <a href="#markets">Markets</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            Live exchange rates
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="eyebrow">
+                    <span class="status-dot"></span>
+                    GLOBAL CURRENCY EXCHANGE
+                </div>
+
+                <h1>Currency without<br>the <span>complications.</span></h1>
+
+                <p>
+                    Convert currencies, explore exchange rates and follow
+                    global markets — all in one place.
+                </p>
+
+                <a href="#converter" class="hero-link">
+                    Start converting <span>↗</span>
+                </a>
+            </div>
+
+            <div class="hero-decoration">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit-center">V</div>
+                <span class="orbit-symbol symbol-one">$</span>
+                <span class="orbit-symbol symbol-two">€</span>
+                <span class="orbit-symbol symbol-three">¥</span>
+                <span class="orbit-symbol symbol-four">£</span>
+            </div>
+        </section>
+
+        <section class="converter-section" id="converter">
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">01 / CONVERTER</span>
+                    <h2>Make your move.</h2>
+                </div>
+                <p>Fast, simple currency conversion.</p>
+            </div>
+
+            <div class="converter-card">
+                <div class="converter-top">
+                    <span>Currency converter</span>
+                    <span class="live-label">
+                        <span class="status-dot"></span>
+                        LIVE
+                    </span>
+                </div>
+
+                <div class="currency-fields">
+                    <div class="currency-field">
+                        <label>You send</label>
+                        <input type="number" id="amount" value="100" min="0">
+
+                        <button class="currency-select" id="fromCurrency">
+                            <img src="https://flagcdn.com/w40/us.png" alt="US flag">
+                            <span>USD</span>
+                            <span class="select-arrow">⌄</span>
+                        </button>
+                    </div>
+
+                    <button class="swap-button" id="swapButton" aria-label="Swap currencies">
+                        ⇅
+                    </button>
+
+                    <div class="currency-field">
+                        <label>You receive</label>
+                        <div class="result-amount" id="result">0.00</div>
+
+                        <button class="currency-select" id="toCurrency">
+                            <img src="https://flagcdn.com/w40/ng.png" alt="Nigeria flag">
+                            <span>NGN</span>
+                            <span class="select-arrow">⌄</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="conversion-info">
+                    <span id="rateInfo">Loading exchange rate...</span>
+                    <span id="lastUpdated">Updating...</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="chart-section" id="chart">
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">02 / MARKET ANALYSIS</span>
+                    <h2>Watch the movement.</h2>
+                </div>
+                <p>Explore historical exchange-rate movements.</p>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div>
+                        <span class="chart-overline">EXCHANGE RATE</span>
+                        <h3 id="chartPairTitle">USD / NGN</h3>
+                        <div class="chart-current-rate" id="chartRate">Loading...</div>
+                        <span class="chart-change" id="chartStatus">Fetching historical data</span>
+                    </div>
+
+                    <div class="chart-currency-selectors">
+                        <select id="chartBase">
+                            <option value="USD">USD</option>
+                            <option value="NGN">NGN</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                        </select>
+
+                        <select id="chartQuote">
+                            <option value="NGN">NGN</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="chart-stats">
+                    <div>
+                        <span>Latest</span>
+                        <strong id="chartLatest">—</strong>
+                    </div>
+                    <div>
+                        <span>Period high</span>
+                        <strong id="chartHigh">—</strong>
+                    </div>
+                    <div>
+                        <span>Period low</span>
+                        <strong id="chartLow">—</strong>
+                    </div>
+                </div>
+
+                <div class="chart-periods">
+                    <button class="period-button active" data-period="7D">7D</button>
+                    <button class="period-button" data-period="30D">30D</button>
+                    <button class="period-button" data-period="90D">90D</button>
+                    <button class="period-button" data-period="1Y">1Y</button>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="rateChart"></canvas>
+
+                    <div class="chart-tooltip" id="chartTooltip">
+                        <span id="tooltipDate"></span>
+                        <strong id="tooltipRate"></strong>
+                    </div>
+                </div>
+
+                <div class="chart-footer">
+                    <span>Historical daily exchange-rate data</span>
+                    <span id="chartFooterStatus">Waiting for data</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="markets-section" id="markets">
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">03 / GLOBAL MARKETS</span>
+                    <h2>Across the market.</h2>
+                </div>
+                <p>Keep an eye on popular currency pairs.</p>
+            </div>
+
+            <div class="market-controls">
+                <label for="marketBase">Compare against</label>
+                <select id="marketBase">
+                    <option value="USD">USD — US Dollar</option>
+                    <option value="NGN">NGN — Nigerian Naira</option>
+                    <option value="EUR">EUR — Euro</option>
+                    <option value="GBP">GBP — British Pound</option>
+                </select>
+            </div>
+
+            <div class="market-grid" id="marketGrid">
+                <div class="market-loading">Loading market data...</div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <span class="section-label">04 / ABOUT VYRO</span>
+            <h2>A clearer view of<br>the <span>world's currencies.</span></h2>
+            <p>
+                VYRO brings currency conversion and exchange-rate information
+                together in one clean, focused experience.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <a href="#" class="logo">VYRO<span>.</span></a>
+        <p>Currency, made clearer.</p>
+        <span>© 2026 VYRO. Exchange rates are indicative.</span>
+    </footer>
+
+    <div class="currency-modal" id="currencyModal">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <span class="section-label">SELECT CURRENCY</span>
+                    <h3>Choose a currency</h3>
+                </div>
+
+                <button class="modal-close" id="closeModal">×</button>
+            </div>
+
+            <input
+                type="text"
+                id="currencySearch"
+                placeholder="Search currency or country..."
+                autocomplete="off"
+            >
+
+            <div class="currency-list" id="currencyList"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
